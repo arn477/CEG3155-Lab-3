@@ -1,0 +1,75 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\arnav\Desktop\CEG3155-Lab-3\simulation\modelsim
+Enbitcomparator
+Z1 w1730808506
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dC:\Users\arnav\Desktop\CEG3155-Lab-3\simulation\modelsim
+Z5 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd
+Z6 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd
+l0
+L4
+V:nnUJiHmQ26=L0FAP8Nc@2
+Z7 OV;C;10.1d;51
+31
+Z8 !s108 1730808567.744000
+Z9 !s90 -reportprogress|300|-93|-work|work|C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd|
+Z10 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd|
+Z11 o-93 -work work -O0
+Z12 tExplicit 1
+!s100 7@VOZ6?jQ0G?UZn>MD?XM2
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 14 nbitcomparator 0 22 :nnUJiHmQ26=L0FAP8Nc@2
+l21
+L11
+VjRNI4kFWl>HkJk0IYBF3e0
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 I0]fE0YW9kaf229Hn7GKJ0
+!i10b 1
+Eonebitcomparator
+Z13 w1730796918
+R2
+R3
+R4
+Z14 8C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd
+Z15 FC:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd
+l0
+L31
+VQZ3H_AB;@zWF[WaFlPKd70
+!s100 <jX6<_c^nQ8XW_1O_gY[<1
+R7
+31
+!i10b 1
+Z16 !s108 1730808567.846000
+Z17 !s90 -reportprogress|300|-93|-work|work|C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd|
+Z18 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd|
+R11
+R12
+Artl
+R2
+R3
+DEx4 work 16 onebitcomparator 0 22 QZ3H_AB;@zWF[WaFlPKd70
+l42
+L38
+VHW0[zHAk8Z3KdeaE[Z3E51
+!s100 8fVAI]h6XZcSDo?:0YWH41
+R7
+31
+!i10b 1
+R16
+R17
+R18
+R11
+R12

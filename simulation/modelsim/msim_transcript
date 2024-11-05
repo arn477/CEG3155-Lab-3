@@ -1,0 +1,60 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# ERROR: No extended dataflow license exists
+# do CEG3155-Lab-3_run_msim_rtl_vhdl.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity nbitcomparator
+# -- Compiling architecture rtl of nbitcomparator
+# vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity oneBitComparator
+# -- Compiling architecture rtl of oneBitComparator
+# 
+vsim work.nbitcomparator
+# vsim work.nbitcomparator 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.nbitcomparator(rtl)
+# Loading work.onebitcomparator(rtl)
+add wave -position insertpoint  \
+sim:/nbitcomparator/i_A \
+sim:/nbitcomparator/i_B \
+sim:/nbitcomparator/n \
+sim:/nbitcomparator/o_AeqB \
+sim:/nbitcomparator/o_AgtB \
+sim:/nbitcomparator/o_AltB \
+sim:/nbitcomparator/int_AeqB \
+sim:/nbitcomparator/int_AgtB \
+sim:/nbitcomparator/int_AltB
+force -freeze sim:/nbitcomparator/i_A 0100 0
+force -freeze sim:/nbitcomparator/i_B {0010} 0
+# Value length (5) does not equal array index length (4).
+# 
+# ** Error: (vsim-4011) Invalid force value: {0010} 0.
+# 
+force -freeze sim:/nbitcomparator/i_B 0010 0
+run
+run
+force -freeze sim:/nbitcomparator/i_A 0010 0
+run
+run
+force -freeze sim:/nbitcomparator/i_A 0000 0
+run
+run
