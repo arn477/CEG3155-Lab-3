@@ -1,4 +1,150 @@
-|nbitcomparator
+|nBitTimer
+i_clk => nBitIncrementer:incrementer.clk
+i_clk => enARdFF_2:doneFF.i_clock
+i_reset => nBitIncrementer:incrementer.reset
+i_reset => enARdFF_2:doneFF.i_resetBar
+i_targetCount[0] => nbitcomparator:comparator.i_B[0]
+i_targetCount[1] => nbitcomparator:comparator.i_B[1]
+i_targetCount[2] => nbitcomparator:comparator.i_B[2]
+i_targetCount[3] => nbitcomparator:comparator.i_B[3]
+o_done <= enARdFF_2:doneFF.o_q
+
+
+|nBitTimer|nBitIncrementer:incrementer
+clk => nBitRegister:reg.i_clock
+reset => nBitRegister:reg.i_resetBar
+increment => nBitRegister:reg.i_load
+y[0] <= nBitRegister:reg.o_Value[0]
+y[1] <= nBitRegister:reg.o_Value[1]
+y[2] <= nBitRegister:reg.o_Value[2]
+y[3] <= nBitRegister:reg.o_Value[3]
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitAdderSubtractor:adder
+i_Ai[0] => oneBitAdderSubtractor:add_0.i_Ai
+i_Ai[1] => oneBitAdderSubtractor:loop_add:1:addrn.i_Ai
+i_Ai[2] => oneBitAdderSubtractor:loop_add:2:addrn.i_Ai
+i_Ai[3] => oneBitAdderSubtractor:loop_add:3:addrn.i_Ai
+i_Bi[0] => oneBitAdderSubtractor:add_0.i_Bi
+i_Bi[1] => oneBitAdderSubtractor:loop_add:1:addrn.i_Bi
+i_Bi[2] => oneBitAdderSubtractor:loop_add:2:addrn.i_Bi
+i_Bi[3] => oneBitAdderSubtractor:loop_add:3:addrn.i_Bi
+operationFlag => oneBitAdderSubtractor:add_0.i_CarryIn
+operationFlag => oneBitAdderSubtractor:add_0.operationFlag
+operationFlag => oneBitAdderSubtractor:loop_add:1:addrn.operationFlag
+operationFlag => oneBitAdderSubtractor:loop_add:2:addrn.operationFlag
+operationFlag => oneBitAdderSubtractor:loop_add:3:addrn.operationFlag
+o_CarryOut <= oneBitAdderSubtractor:loop_add:3:addrn.o_CarryOut
+o_Sum[0] <= oneBitAdderSubtractor:add_0.o_Sum
+o_Sum[1] <= oneBitAdderSubtractor:loop_add:1:addrn.o_Sum
+o_Sum[2] <= oneBitAdderSubtractor:loop_add:2:addrn.o_Sum
+o_Sum[3] <= oneBitAdderSubtractor:loop_add:3:addrn.o_Sum
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitAdderSubtractor:adder|oneBitAdderSubtractor:add_0
+i_CarryIn => carryFromBoth.IN0
+i_CarryIn => carryFromAi.IN0
+operationFlag => xor_Bi.IN0
+i_Ai => carryFromBoth.IN1
+i_Ai => carryFromAi.IN1
+i_Bi => xor_Bi.IN1
+o_Sum <= o_Sum.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitAdderSubtractor:adder|oneBitAdderSubtractor:\loop_add:1:addrn
+i_CarryIn => carryFromBoth.IN0
+i_CarryIn => carryFromAi.IN0
+operationFlag => xor_Bi.IN0
+i_Ai => carryFromBoth.IN1
+i_Ai => carryFromAi.IN1
+i_Bi => xor_Bi.IN1
+o_Sum <= o_Sum.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitAdderSubtractor:adder|oneBitAdderSubtractor:\loop_add:2:addrn
+i_CarryIn => carryFromBoth.IN0
+i_CarryIn => carryFromAi.IN0
+operationFlag => xor_Bi.IN0
+i_Ai => carryFromBoth.IN1
+i_Ai => carryFromAi.IN1
+i_Bi => xor_Bi.IN1
+o_Sum <= o_Sum.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitAdderSubtractor:adder|oneBitAdderSubtractor:\loop_add:3:addrn
+i_CarryIn => carryFromBoth.IN0
+i_CarryIn => carryFromAi.IN0
+operationFlag => xor_Bi.IN0
+i_Ai => carryFromBoth.IN1
+i_Ai => carryFromAi.IN1
+i_Bi => xor_Bi.IN1
+o_Sum <= o_Sum.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitRegister:reg
+i_resetBar => enARdFF_2:reg_n_bits:0:b.i_resetBar
+i_resetBar => enARdFF_2:reg_n_bits:1:b.i_resetBar
+i_resetBar => enARdFF_2:reg_n_bits:2:b.i_resetBar
+i_resetBar => enARdFF_2:reg_n_bits:3:b.i_resetBar
+i_load => enARdFF_2:reg_n_bits:0:b.i_enable
+i_load => enARdFF_2:reg_n_bits:1:b.i_enable
+i_load => enARdFF_2:reg_n_bits:2:b.i_enable
+i_load => enARdFF_2:reg_n_bits:3:b.i_enable
+i_clock => enARdFF_2:reg_n_bits:0:b.i_clock
+i_clock => enARdFF_2:reg_n_bits:1:b.i_clock
+i_clock => enARdFF_2:reg_n_bits:2:b.i_clock
+i_clock => enARdFF_2:reg_n_bits:3:b.i_clock
+i_Value[0] => enARdFF_2:reg_n_bits:0:b.i_d
+i_Value[1] => enARdFF_2:reg_n_bits:1:b.i_d
+i_Value[2] => enARdFF_2:reg_n_bits:2:b.i_d
+i_Value[3] => enARdFF_2:reg_n_bits:3:b.i_d
+o_Value[0] <= enARdFF_2:reg_n_bits:0:b.o_q
+o_Value[1] <= enARdFF_2:reg_n_bits:1:b.o_q
+o_Value[2] <= enARdFF_2:reg_n_bits:2:b.o_q
+o_Value[3] <= enARdFF_2:reg_n_bits:3:b.o_q
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitRegister:reg|enARdFF_2:\reg_n_bits:0:b
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitRegister:reg|enARdFF_2:\reg_n_bits:1:b
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitRegister:reg|enARdFF_2:\reg_n_bits:2:b
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nBitIncrementer:incrementer|nBitRegister:reg|enARdFF_2:\reg_n_bits:3:b
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|nbitcomparator:comparator
 i_A[0] => oneBitComparator:comparatorLoop:0:comparator_n.i_Ai
 i_A[1] => oneBitComparator:comparatorLoop:1:comparator_n.i_Ai
 i_A[2] => oneBitComparator:comparatorLoop:2:comparator_n.i_Ai
@@ -12,7 +158,7 @@ o_AgtB <= oneBitComparator:comparatorLoop:0:comparator_n.o_GT
 o_AltB <= oneBitComparator:comparatorLoop:0:comparator_n.o_LT
 
 
-|nbitcomparator|oneBitComparator:comparatorMSB
+|nBitTimer|nbitcomparator:comparator|oneBitComparator:comparatorMSB
 i_GTPrevious => int_GT2.IN0
 i_GTPrevious => int_GT1.IN0
 i_GTPrevious => int_LT2.IN0
@@ -27,7 +173,7 @@ o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
 o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|nbitcomparator|oneBitComparator:\comparatorLoop:2:comparator_n
+|nBitTimer|nbitcomparator:comparator|oneBitComparator:\comparatorLoop:2:comparator_n
 i_GTPrevious => int_GT2.IN0
 i_GTPrevious => int_GT1.IN0
 i_GTPrevious => int_LT2.IN0
@@ -42,7 +188,7 @@ o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
 o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|nbitcomparator|oneBitComparator:\comparatorLoop:1:comparator_n
+|nBitTimer|nbitcomparator:comparator|oneBitComparator:\comparatorLoop:1:comparator_n
 i_GTPrevious => int_GT2.IN0
 i_GTPrevious => int_GT1.IN0
 i_GTPrevious => int_LT2.IN0
@@ -57,7 +203,7 @@ o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
 o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|nbitcomparator|oneBitComparator:\comparatorLoop:0:comparator_n
+|nBitTimer|nbitcomparator:comparator|oneBitComparator:\comparatorLoop:0:comparator_n
 i_GTPrevious => int_GT2.IN0
 i_GTPrevious => int_GT1.IN0
 i_GTPrevious => int_LT2.IN0
@@ -70,5 +216,14 @@ i_Bi => int_LT1.IN1
 i_Bi => int_GT1.IN1
 o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
 o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|nBitTimer|enARdFF_2:doneFF
+i_resetBar => int_q.ACLR
+i_d => int_q.DATAIN
+i_enable => int_q.ENA
+i_clock => int_q.CLK
+o_q <= int_q.DB_MAX_OUTPUT_PORT_TYPE
+o_qBar <= int_q.DB_MAX_OUTPUT_PORT_TYPE
 
 

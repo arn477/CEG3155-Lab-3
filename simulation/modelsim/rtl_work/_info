@@ -3,23 +3,93 @@ K3
 13
 cModel Technology
 Z0 dC:\Users\arnav\Desktop\CEG3155-Lab-3\simulation\modelsim
-Enbitcomparator
-Z1 w1730808506
+Eenardff_2
+Z1 w1727839476
 Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
 Z4 dC:\Users\arnav\Desktop\CEG3155-Lab-3\simulation\modelsim
-Z5 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd
-Z6 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd
+Z5 8C:/Users/arnav/Desktop/CEG3155-Lab-3/enardFF_2.vhd
+Z6 FC:/Users/arnav/Desktop/CEG3155-Lab-3/enardFF_2.vhd
+l0
+L31
+VefK2f?3R7`bZO40Rc84Mm0
+Z7 OV;C;10.1d;51
+31
+Z8 !s108 1730812591.764000
+Z9 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/enardFF_2.vhd|
+Z10 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/enardFF_2.vhd|
+Z11 o-93 -work work -O0
+Z12 tExplicit 1
+!s100 LM:aJ[Ade62O^TDCQB2jH0
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 9 enardff_2 0 22 efK2f?3R7`bZO40Rc84Mm0
+l43
+L40
+VAd]:U5^6W=P5UO^;ST?Bz2
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 n`NKG5gX7V@?eV@4dAU663
+!i10b 1
+Enbitaddersubtractor
+Z13 w1729255518
+R2
+R3
+R4
+Z14 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitAdderSubtractor.vhd
+Z15 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nBitAdderSubtractor.vhd
+l0
+L4
+VBK@g4UmbVIO2F:_QO^>S:3
+R7
+31
+Z16 !s108 1730812591.881000
+Z17 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitAdderSubtractor.vhd|
+Z18 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitAdderSubtractor.vhd|
+R11
+R12
+!s100 ]XcB[A[205c<zncX5c2H>3
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 19 nbitaddersubtractor 0 22 BK@g4UmbVIO2F:_QO^>S:3
+l24
+L13
+VkWkDh<<n`YGz84_o8CN8b2
+R7
+31
+R16
+R17
+R18
+R11
+R12
+!s100 A374Q0Ki]kLa8bXzRPJH03
+!i10b 1
+Enbitcomparator
+Z19 w1730808691
+R2
+R3
+R4
+Z20 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd
+Z21 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd
 l0
 L4
 V:nnUJiHmQ26=L0FAP8Nc@2
-Z7 OV;C;10.1d;51
+R7
 31
-Z8 !s108 1730808567.744000
-Z9 !s90 -reportprogress|300|-93|-work|work|C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd|
-Z10 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd|
-Z11 o-93 -work work -O0
-Z12 tExplicit 1
+Z22 !s108 1730812591.956000
+Z23 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd|
+Z24 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd|
+R11
+R12
 !s100 7@VOZ6?jQ0G?UZn>MD?XM2
 !i10b 1
 Artl
@@ -28,23 +98,163 @@ R3
 DEx4 work 14 nbitcomparator 0 22 :nnUJiHmQ26=L0FAP8Nc@2
 l21
 L11
-VjRNI4kFWl>HkJk0IYBF3e0
+VBf>bLm]P^ZmG3ZN;jl9oa3
 R7
 31
-R8
-R9
-R10
+R22
+R23
+R24
 R11
 R12
-!s100 I0]fE0YW9kaf229Hn7GKJ0
+!s100 kgKdH`26=BWN3:TA8Clm_3
 !i10b 1
-Eonebitcomparator
-Z13 w1730796918
+Enbitincrementer
+Z25 w1730810967
 R2
 R3
 R4
-Z14 8C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd
-Z15 FC:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd
+Z26 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitIncrementer.vhd
+Z27 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nBitIncrementer.vhd
+l0
+L4
+V@6U`_MN33]m]PHC2HflIW0
+R7
+31
+Z28 !s108 1730812592.071000
+Z29 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitIncrementer.vhd|
+Z30 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitIncrementer.vhd|
+R11
+R12
+!s100 iA8V1jKoZZ[V;?@8bg5Qm0
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 15 nbitincrementer 0 22 @6U`_MN33]m]PHC2HflIW0
+l33
+L10
+VL`^:GNfa1lWRXHfQi:O7V1
+R7
+31
+R28
+R29
+R30
+R11
+R12
+!s100 ffJ0HBF`dY?^EhRAXE^882
+!i10b 1
+Enbitregister
+Z31 w1729247964
+R2
+R3
+R4
+Z32 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitregister.vhd
+Z33 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nbitregister.vhd
+l0
+L4
+VkF8FVK2AB2BAUM0<iLAeR2
+R7
+31
+Z34 !s108 1730812592.153000
+Z35 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitregister.vhd|
+Z36 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitregister.vhd|
+R11
+R12
+!s100 ^13zkOmfoz0TA36ak>iO12
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 12 nbitregister 0 22 kF8FVK2AB2BAUM0<iLAeR2
+l25
+L13
+VJ6LGc<7=UGRX_icea99AU1
+R7
+31
+R34
+R35
+R36
+R11
+R12
+!s100 _B32VC]E46F<Y9aV4gIU]3
+!i10b 1
+Enbittimer
+Z37 w1730812579
+R2
+R3
+R4
+Z38 8C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitTimer.vhd
+Z39 FC:/Users/arnav/Desktop/CEG3155-Lab-3/nBitTimer.vhd
+l0
+L4
+VG^e6POGDPKf]C3fZHnU<@1
+R7
+31
+Z40 !s108 1730812592.236000
+Z41 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitTimer.vhd|
+Z42 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitTimer.vhd|
+R11
+R12
+!s100 ?hI`X^5HG[65X><5ElL032
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 9 nbittimer 0 22 G^e6POGDPKf]C3fZHnU<@1
+l39
+L12
+VAaTEE`TT9Ac8?@fJM4oR41
+R7
+31
+R40
+R41
+R42
+R11
+R12
+!s100 fK0oCiPnSP<flh;]F2Do>0
+!i10b 1
+Eonebitaddersubtractor
+Z43 w1729224540
+R2
+R3
+R4
+Z44 8C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitAdderSubtractor.vhd
+Z45 FC:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitAdderSubtractor.vhd
+l0
+L17
+V4;>2a4D8>JDfE8eVL3Z8m0
+R7
+31
+Z46 !s108 1730812592.321000
+Z47 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitAdderSubtractor.vhd|
+Z48 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitAdderSubtractor.vhd|
+R11
+R12
+!s100 KYYeBM`YQZz_9[NR]8<7A2
+!i10b 1
+Artl
+R2
+R3
+DEx4 work 21 onebitaddersubtractor 0 22 4;>2a4D8>JDfE8eVL3Z8m0
+l29
+L25
+VP6gCAZhYR_P92NR<gmoK83
+!s100 da<zK2RC=nV=hn^5_ASW>1
+R7
+31
+R46
+R47
+R48
+R11
+R12
+!i10b 1
+Eonebitcomparator
+Z49 w1730796918
+R2
+R3
+R4
+Z50 8C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd
+Z51 FC:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd
 l0
 L31
 VQZ3H_AB;@zWF[WaFlPKd70
@@ -52,24 +262,24 @@ VQZ3H_AB;@zWF[WaFlPKd70
 R7
 31
 !i10b 1
-Z16 !s108 1730808567.846000
-Z17 !s90 -reportprogress|300|-93|-work|work|C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd|
-Z18 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd|
+Z52 !s108 1730812592.411000
+Z53 !s90 -reportprogress|300|-93|-work|work|-O0|C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd|
+Z54 !s107 C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd|
 R11
 R12
 Artl
 R2
 R3
-DEx4 work 16 onebitcomparator 0 22 QZ3H_AB;@zWF[WaFlPKd70
+Z55 DEx4 work 16 onebitcomparator 0 22 QZ3H_AB;@zWF[WaFlPKd70
 l42
 L38
-VHW0[zHAk8Z3KdeaE[Z3E51
-!s100 8fVAI]h6XZcSDo?:0YWH41
+Z56 VHW0[zHAk8Z3KdeaE[Z3E51
+Z57 !s100 8fVAI]h6XZcSDo?:0YWH41
 R7
 31
 !i10b 1
-R16
-R17
-R18
+R52
+R53
+R54
 R11
 R12

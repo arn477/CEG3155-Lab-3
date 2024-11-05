@@ -16,7 +16,7 @@
 -- PROGRAM "Quartus II 64-Bit"
 -- VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition"
 
--- DATE "11/05/2024 07:11:58"
+-- DATE "11/05/2024 08:18:59"
 
 -- 
 -- Device: Altera EP4CE115F29C7 Package FBGA780
@@ -26,36 +26,33 @@
 -- This VHDL file should be used for ModelSim-Altera (VHDL) only
 -- 
 
+LIBRARY ALTERA;
 LIBRARY CYCLONEIVE;
 LIBRARY IEEE;
+USE ALTERA.ALTERA_PRIMITIVES_COMPONENTS.ALL;
 USE CYCLONEIVE.CYCLONEIVE_COMPONENTS.ALL;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY 	nbitcomparator IS
+ENTITY 	nBitTimer IS
     PORT (
-	i_A : IN std_logic_vector(3 DOWNTO 0);
-	i_B : IN std_logic_vector(3 DOWNTO 0);
-	o_AeqB : OUT std_logic;
-	o_AgtB : OUT std_logic;
-	o_AltB : OUT std_logic
+	i_clk : IN std_logic;
+	i_reset : IN std_logic;
+	i_targetCount : IN std_logic_vector(3 DOWNTO 0);
+	o_done : OUT std_logic
 	);
-END nbitcomparator;
+END nBitTimer;
 
 -- Design Ports Information
--- o_AeqB	=>  Location: PIN_G6,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- o_AgtB	=>  Location: PIN_C2,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- o_AltB	=>  Location: PIN_E5,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_A[0]	=>  Location: PIN_H7,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_B[0]	=>  Location: PIN_D2,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_A[3]	=>  Location: PIN_C3,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_A[2]	=>  Location: PIN_D4,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_B[2]	=>  Location: PIN_G5,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_B[3]	=>  Location: PIN_C5,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_A[1]	=>  Location: PIN_D1,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- i_B[1]	=>  Location: PIN_E4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- o_done	=>  Location: PIN_W3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_targetCount[0]	=>  Location: PIN_Y6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_targetCount[1]	=>  Location: PIN_Y7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_targetCount[2]	=>  Location: PIN_Y5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_targetCount[3]	=>  Location: PIN_W7,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_clk	=>  Location: PIN_J1,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- i_reset	=>  Location: PIN_Y2,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
-ARCHITECTURE structure OF nbitcomparator IS
+ARCHITECTURE structure OF nBitTimer IS
 SIGNAL gnd : std_logic := '0';
 SIGNAL vcc : std_logic := '1';
 SIGNAL unknown : std_logic := 'X';
@@ -65,292 +62,344 @@ SIGNAL devpor : std_logic := '1';
 SIGNAL ww_devoe : std_logic;
 SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
-SIGNAL ww_i_A : std_logic_vector(3 DOWNTO 0);
-SIGNAL ww_i_B : std_logic_vector(3 DOWNTO 0);
-SIGNAL ww_o_AeqB : std_logic;
-SIGNAL ww_o_AgtB : std_logic;
-SIGNAL ww_o_AltB : std_logic;
-SIGNAL \comparatorLoop:2:comparator_n|o_LT~0_combout\ : std_logic;
-SIGNAL \i_A[2]~input_o\ : std_logic;
-SIGNAL \o_AeqB~output_o\ : std_logic;
-SIGNAL \o_AgtB~output_o\ : std_logic;
-SIGNAL \o_AltB~output_o\ : std_logic;
-SIGNAL \i_A[3]~input_o\ : std_logic;
-SIGNAL \i_B[2]~input_o\ : std_logic;
-SIGNAL \i_B[3]~input_o\ : std_logic;
-SIGNAL \comparatorLoop:2:comparator_n|o_GT~0_combout\ : std_logic;
-SIGNAL \i_A[1]~input_o\ : std_logic;
-SIGNAL \i_B[1]~input_o\ : std_logic;
-SIGNAL \comparatorLoop:1:comparator_n|o_GT~0_combout\ : std_logic;
-SIGNAL \i_A[0]~input_o\ : std_logic;
-SIGNAL \i_B[0]~input_o\ : std_logic;
-SIGNAL \comparatorLoop:1:comparator_n|o_LT~0_combout\ : std_logic;
-SIGNAL \o_AeqB~0_combout\ : std_logic;
-SIGNAL \comparatorLoop:0:comparator_n|o_GT~0_combout\ : std_logic;
-SIGNAL \comparatorLoop:0:comparator_n|o_LT~0_combout\ : std_logic;
-SIGNAL \ALT_INV_o_AeqB~0_combout\ : std_logic;
+SIGNAL ww_i_clk : std_logic;
+SIGNAL ww_i_reset : std_logic;
+SIGNAL ww_i_targetCount : std_logic_vector(3 DOWNTO 0);
+SIGNAL ww_o_done : std_logic;
+SIGNAL \i_reset~inputclkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \i_clk~inputclkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
+SIGNAL \incrementer|reg|reg_n_bits:2:b|int_q~q\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:3:b|int_q~q\ : std_logic;
+SIGNAL \comparator|o_AeqB~1_combout\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:2:b|int_q~0_combout\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:3:b|int_q~0_combout\ : std_logic;
+SIGNAL \i_targetCount[1]~input_o\ : std_logic;
+SIGNAL \i_targetCount[2]~input_o\ : std_logic;
+SIGNAL \i_targetCount[3]~input_o\ : std_logic;
+SIGNAL \o_done~output_o\ : std_logic;
+SIGNAL \i_clk~input_o\ : std_logic;
+SIGNAL \i_clk~inputclkctrl_outclk\ : std_logic;
+SIGNAL \i_targetCount[0]~input_o\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:0:b|int_q~0_combout\ : std_logic;
+SIGNAL \i_reset~input_o\ : std_logic;
+SIGNAL \i_reset~inputclkctrl_outclk\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:0:b|int_q~q\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:1:b|int_q~0_combout\ : std_logic;
+SIGNAL \incrementer|reg|reg_n_bits:1:b|int_q~q\ : std_logic;
+SIGNAL \comparator|o_AeqB~0_combout\ : std_logic;
+SIGNAL \doneFF|int_q~0_combout\ : std_logic;
+SIGNAL \doneFF|int_q~q\ : std_logic;
+SIGNAL \ALT_INV_i_reset~inputclkctrl_outclk\ : std_logic;
 
 BEGIN
 
-ww_i_A <= i_A;
-ww_i_B <= i_B;
-o_AeqB <= ww_o_AeqB;
-o_AgtB <= ww_o_AgtB;
-o_AltB <= ww_o_AltB;
+ww_i_clk <= i_clk;
+ww_i_reset <= i_reset;
+ww_i_targetCount <= i_targetCount;
+o_done <= ww_o_done;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
-\ALT_INV_o_AeqB~0_combout\ <= NOT \o_AeqB~0_combout\;
 
--- Location: LCCOMB_X1_Y69_N26
-\comparatorLoop:2:comparator_n|o_LT~0\ : cycloneive_lcell_comb
+\i_reset~inputclkctrl_INCLK_bus\ <= (vcc & vcc & vcc & \i_reset~input_o\);
+
+\i_clk~inputclkctrl_INCLK_bus\ <= (vcc & vcc & vcc & \i_clk~input_o\);
+\ALT_INV_i_reset~inputclkctrl_outclk\ <= NOT \i_reset~inputclkctrl_outclk\;
+
+-- Location: FF_X1_Y12_N21
+\incrementer|reg|reg_n_bits:2:b|int_q\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \i_clk~inputclkctrl_outclk\,
+	d => \incrementer|reg|reg_n_bits:2:b|int_q~0_combout\,
+	clrn => \ALT_INV_i_reset~inputclkctrl_outclk\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incrementer|reg|reg_n_bits:2:b|int_q~q\);
+
+-- Location: FF_X1_Y12_N15
+\incrementer|reg|reg_n_bits:3:b|int_q\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \i_clk~inputclkctrl_outclk\,
+	d => \incrementer|reg|reg_n_bits:3:b|int_q~0_combout\,
+	clrn => \ALT_INV_i_reset~inputclkctrl_outclk\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incrementer|reg|reg_n_bits:3:b|int_q~q\);
+
+-- Location: LCCOMB_X1_Y12_N12
+\comparator|o_AeqB~1\ : cycloneive_lcell_comb
 -- Equation(s):
--- \comparatorLoop:2:comparator_n|o_LT~0_combout\ = (\i_A[3]~input_o\ & (!\i_A[2]~input_o\ & (\i_B[2]~input_o\ & \i_B[3]~input_o\))) # (!\i_A[3]~input_o\ & ((\i_B[3]~input_o\) # ((!\i_A[2]~input_o\ & \i_B[2]~input_o\))))
+-- \comparator|o_AeqB~1_combout\ = (\i_targetCount[3]~input_o\ & ((\i_targetCount[2]~input_o\ $ (\incrementer|reg|reg_n_bits:2:b|int_q~q\)) # (!\incrementer|reg|reg_n_bits:3:b|int_q~q\))) # (!\i_targetCount[3]~input_o\ & 
+-- ((\incrementer|reg|reg_n_bits:3:b|int_q~q\) # (\i_targetCount[2]~input_o\ $ (\incrementer|reg|reg_n_bits:2:b|int_q~q\))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0111001100010000",
+	lut_mask => "0111101111011110",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \i_A[2]~input_o\,
-	datab => \i_A[3]~input_o\,
-	datac => \i_B[2]~input_o\,
-	datad => \i_B[3]~input_o\,
-	combout => \comparatorLoop:2:comparator_n|o_LT~0_combout\);
+	dataa => \i_targetCount[3]~input_o\,
+	datab => \i_targetCount[2]~input_o\,
+	datac => \incrementer|reg|reg_n_bits:3:b|int_q~q\,
+	datad => \incrementer|reg|reg_n_bits:2:b|int_q~q\,
+	combout => \comparator|o_AeqB~1_combout\);
 
--- Location: IOIBUF_X1_Y73_N1
-\i_A[2]~input\ : cycloneive_io_ibuf
+-- Location: LCCOMB_X1_Y12_N20
+\incrementer|reg|reg_n_bits:2:b|int_q~0\ : cycloneive_lcell_comb
+-- Equation(s):
+-- \incrementer|reg|reg_n_bits:2:b|int_q~0_combout\ = \incrementer|reg|reg_n_bits:2:b|int_q~q\ $ (((\incrementer|reg|reg_n_bits:0:b|int_q~q\ & \incrementer|reg|reg_n_bits:1:b|int_q~q\)))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0101101011110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incrementer|reg|reg_n_bits:0:b|int_q~q\,
+	datac => \incrementer|reg|reg_n_bits:2:b|int_q~q\,
+	datad => \incrementer|reg|reg_n_bits:1:b|int_q~q\,
+	combout => \incrementer|reg|reg_n_bits:2:b|int_q~0_combout\);
+
+-- Location: LCCOMB_X1_Y12_N14
+\incrementer|reg|reg_n_bits:3:b|int_q~0\ : cycloneive_lcell_comb
+-- Equation(s):
+-- \incrementer|reg|reg_n_bits:3:b|int_q~0_combout\ = \incrementer|reg|reg_n_bits:3:b|int_q~q\ $ (((\incrementer|reg|reg_n_bits:0:b|int_q~q\ & (\incrementer|reg|reg_n_bits:2:b|int_q~q\ & \incrementer|reg|reg_n_bits:1:b|int_q~q\))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0111100011110000",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \incrementer|reg|reg_n_bits:0:b|int_q~q\,
+	datab => \incrementer|reg|reg_n_bits:2:b|int_q~q\,
+	datac => \incrementer|reg|reg_n_bits:3:b|int_q~q\,
+	datad => \incrementer|reg|reg_n_bits:1:b|int_q~q\,
+	combout => \incrementer|reg|reg_n_bits:3:b|int_q~0_combout\);
+
+-- Location: IOIBUF_X0_Y11_N22
+\i_targetCount[1]~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_i_A(2),
-	o => \i_A[2]~input_o\);
+	i => ww_i_targetCount(1),
+	o => \i_targetCount[1]~input_o\);
 
--- Location: IOOBUF_X0_Y67_N16
-\o_AeqB~output\ : cycloneive_io_obuf
+-- Location: IOIBUF_X0_Y12_N15
+\i_targetCount[2]~input\ : cycloneive_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_i_targetCount(2),
+	o => \i_targetCount[2]~input_o\);
+
+-- Location: IOIBUF_X0_Y12_N22
+\i_targetCount[3]~input\ : cycloneive_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_i_targetCount(3),
+	o => \i_targetCount[3]~input_o\);
+
+-- Location: IOOBUF_X0_Y13_N2
+\o_done~output\ : cycloneive_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	open_drain_output => "false")
 -- pragma translate_on
 PORT MAP (
-	i => \ALT_INV_o_AeqB~0_combout\,
+	i => \doneFF|int_q~q\,
 	devoe => ww_devoe,
-	o => \o_AeqB~output_o\);
+	o => \o_done~output_o\);
 
--- Location: IOOBUF_X0_Y69_N9
-\o_AgtB~output\ : cycloneive_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false")
--- pragma translate_on
-PORT MAP (
-	i => \comparatorLoop:0:comparator_n|o_GT~0_combout\,
-	devoe => ww_devoe,
-	o => \o_AgtB~output_o\);
-
--- Location: IOOBUF_X1_Y73_N16
-\o_AltB~output\ : cycloneive_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false")
--- pragma translate_on
-PORT MAP (
-	i => \comparatorLoop:0:comparator_n|o_LT~0_combout\,
-	devoe => ww_devoe,
-	o => \o_AltB~output_o\);
-
--- Location: IOIBUF_X1_Y73_N22
-\i_A[3]~input\ : cycloneive_io_ibuf
+-- Location: IOIBUF_X0_Y36_N8
+\i_clk~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_i_A(3),
-	o => \i_A[3]~input_o\);
+	i => ww_i_clk,
+	o => \i_clk~input_o\);
 
--- Location: IOIBUF_X0_Y67_N22
-\i_B[2]~input\ : cycloneive_io_ibuf
+-- Location: CLKCTRL_G2
+\i_clk~inputclkctrl\ : cycloneive_clkctrl
+-- pragma translate_off
+GENERIC MAP (
+	clock_type => "global clock",
+	ena_register_mode => "none")
+-- pragma translate_on
+PORT MAP (
+	inclk => \i_clk~inputclkctrl_INCLK_bus\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	outclk => \i_clk~inputclkctrl_outclk\);
+
+-- Location: IOIBUF_X0_Y13_N8
+\i_targetCount[0]~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_i_B(2),
-	o => \i_B[2]~input_o\);
+	i => ww_i_targetCount(0),
+	o => \i_targetCount[0]~input_o\);
 
--- Location: IOIBUF_X3_Y73_N8
-\i_B[3]~input\ : cycloneive_io_ibuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	simulate_z_as => "z")
--- pragma translate_on
-PORT MAP (
-	i => ww_i_B(3),
-	o => \i_B[3]~input_o\);
-
--- Location: LCCOMB_X1_Y69_N0
-\comparatorLoop:2:comparator_n|o_GT~0\ : cycloneive_lcell_comb
+-- Location: LCCOMB_X1_Y12_N30
+\incrementer|reg|reg_n_bits:0:b|int_q~0\ : cycloneive_lcell_comb
 -- Equation(s):
--- \comparatorLoop:2:comparator_n|o_GT~0_combout\ = (\i_A[3]~input_o\ & (((\i_A[2]~input_o\ & !\i_B[2]~input_o\)) # (!\i_B[3]~input_o\))) # (!\i_A[3]~input_o\ & (\i_A[2]~input_o\ & (!\i_B[2]~input_o\ & !\i_B[3]~input_o\)))
+-- \incrementer|reg|reg_n_bits:0:b|int_q~0_combout\ = !\incrementer|reg|reg_n_bits:0:b|int_q~q\
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000100011001110",
+	lut_mask => "0000111100001111",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \i_A[2]~input_o\,
-	datab => \i_A[3]~input_o\,
-	datac => \i_B[2]~input_o\,
-	datad => \i_B[3]~input_o\,
-	combout => \comparatorLoop:2:comparator_n|o_GT~0_combout\);
+	datac => \incrementer|reg|reg_n_bits:0:b|int_q~q\,
+	combout => \incrementer|reg|reg_n_bits:0:b|int_q~0_combout\);
 
--- Location: IOIBUF_X0_Y68_N8
-\i_A[1]~input\ : cycloneive_io_ibuf
+-- Location: IOIBUF_X0_Y36_N15
+\i_reset~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_i_A(1),
-	o => \i_A[1]~input_o\);
+	i => ww_i_reset,
+	o => \i_reset~input_o\);
 
--- Location: IOIBUF_X1_Y73_N8
-\i_B[1]~input\ : cycloneive_io_ibuf
+-- Location: CLKCTRL_G4
+\i_reset~inputclkctrl\ : cycloneive_clkctrl
 -- pragma translate_off
 GENERIC MAP (
-	bus_hold => "false",
-	simulate_z_as => "z")
+	clock_type => "global clock",
+	ena_register_mode => "none")
 -- pragma translate_on
 PORT MAP (
-	i => ww_i_B(1),
-	o => \i_B[1]~input_o\);
+	inclk => \i_reset~inputclkctrl_INCLK_bus\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	outclk => \i_reset~inputclkctrl_outclk\);
 
--- Location: LCCOMB_X1_Y69_N12
-\comparatorLoop:1:comparator_n|o_GT~0\ : cycloneive_lcell_comb
+-- Location: FF_X1_Y12_N31
+\incrementer|reg|reg_n_bits:0:b|int_q\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \i_clk~inputclkctrl_outclk\,
+	d => \incrementer|reg|reg_n_bits:0:b|int_q~0_combout\,
+	clrn => \ALT_INV_i_reset~inputclkctrl_outclk\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incrementer|reg|reg_n_bits:0:b|int_q~q\);
+
+-- Location: LCCOMB_X1_Y12_N16
+\incrementer|reg|reg_n_bits:1:b|int_q~0\ : cycloneive_lcell_comb
 -- Equation(s):
--- \comparatorLoop:1:comparator_n|o_GT~0_combout\ = (!\comparatorLoop:2:comparator_n|o_LT~0_combout\ & ((\comparatorLoop:2:comparator_n|o_GT~0_combout\) # ((\i_A[1]~input_o\ & !\i_B[1]~input_o\))))
+-- \incrementer|reg|reg_n_bits:1:b|int_q~0_combout\ = \incrementer|reg|reg_n_bits:1:b|int_q~q\ $ (\incrementer|reg|reg_n_bits:0:b|int_q~q\)
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0100010001010100",
+	lut_mask => "0000111111110000",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \comparatorLoop:2:comparator_n|o_LT~0_combout\,
-	datab => \comparatorLoop:2:comparator_n|o_GT~0_combout\,
-	datac => \i_A[1]~input_o\,
-	datad => \i_B[1]~input_o\,
-	combout => \comparatorLoop:1:comparator_n|o_GT~0_combout\);
+	datac => \incrementer|reg|reg_n_bits:1:b|int_q~q\,
+	datad => \incrementer|reg|reg_n_bits:0:b|int_q~q\,
+	combout => \incrementer|reg|reg_n_bits:1:b|int_q~0_combout\);
 
--- Location: IOIBUF_X0_Y68_N15
-\i_A[0]~input\ : cycloneive_io_ibuf
+-- Location: FF_X1_Y12_N17
+\incrementer|reg|reg_n_bits:1:b|int_q\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
-	bus_hold => "false",
-	simulate_z_as => "z")
+	is_wysiwyg => "true",
+	power_up => "low")
 -- pragma translate_on
 PORT MAP (
-	i => ww_i_A(0),
-	o => \i_A[0]~input_o\);
+	clk => \i_clk~inputclkctrl_outclk\,
+	d => \incrementer|reg|reg_n_bits:1:b|int_q~0_combout\,
+	clrn => \ALT_INV_i_reset~inputclkctrl_outclk\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \incrementer|reg|reg_n_bits:1:b|int_q~q\);
 
--- Location: IOIBUF_X0_Y68_N1
-\i_B[0]~input\ : cycloneive_io_ibuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	simulate_z_as => "z")
--- pragma translate_on
-PORT MAP (
-	i => ww_i_B(0),
-	o => \i_B[0]~input_o\);
-
--- Location: LCCOMB_X1_Y69_N6
-\comparatorLoop:1:comparator_n|o_LT~0\ : cycloneive_lcell_comb
+-- Location: LCCOMB_X1_Y12_N18
+\comparator|o_AeqB~0\ : cycloneive_lcell_comb
 -- Equation(s):
--- \comparatorLoop:1:comparator_n|o_LT~0_combout\ = (!\comparatorLoop:2:comparator_n|o_GT~0_combout\ & ((\comparatorLoop:2:comparator_n|o_LT~0_combout\) # ((!\i_A[1]~input_o\ & \i_B[1]~input_o\))))
+-- \comparator|o_AeqB~0_combout\ = (\i_targetCount[1]~input_o\ & ((\i_targetCount[0]~input_o\ $ (\incrementer|reg|reg_n_bits:0:b|int_q~q\)) # (!\incrementer|reg|reg_n_bits:1:b|int_q~q\))) # (!\i_targetCount[1]~input_o\ & 
+-- ((\incrementer|reg|reg_n_bits:1:b|int_q~q\) # (\i_targetCount[0]~input_o\ $ (\incrementer|reg|reg_n_bits:0:b|int_q~q\))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0010001100100010",
+	lut_mask => "0111110110111110",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \comparatorLoop:2:comparator_n|o_LT~0_combout\,
-	datab => \comparatorLoop:2:comparator_n|o_GT~0_combout\,
-	datac => \i_A[1]~input_o\,
-	datad => \i_B[1]~input_o\,
-	combout => \comparatorLoop:1:comparator_n|o_LT~0_combout\);
+	dataa => \i_targetCount[1]~input_o\,
+	datab => \i_targetCount[0]~input_o\,
+	datac => \incrementer|reg|reg_n_bits:0:b|int_q~q\,
+	datad => \incrementer|reg|reg_n_bits:1:b|int_q~q\,
+	combout => \comparator|o_AeqB~0_combout\);
 
--- Location: LCCOMB_X1_Y69_N16
-\o_AeqB~0\ : cycloneive_lcell_comb
+-- Location: LCCOMB_X1_Y12_N24
+\doneFF|int_q~0\ : cycloneive_lcell_comb
 -- Equation(s):
--- \o_AeqB~0_combout\ = (\comparatorLoop:1:comparator_n|o_GT~0_combout\ & (((!\comparatorLoop:1:comparator_n|o_LT~0_combout\)))) # (!\comparatorLoop:1:comparator_n|o_GT~0_combout\ & ((\comparatorLoop:1:comparator_n|o_LT~0_combout\) # (\i_A[0]~input_o\ $ 
--- (\i_B[0]~input_o\))))
+-- \doneFF|int_q~0_combout\ = (\doneFF|int_q~q\) # ((!\comparator|o_AeqB~1_combout\ & !\comparator|o_AeqB~0_combout\))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0101010110111110",
+	lut_mask => "1111000011110101",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \comparatorLoop:1:comparator_n|o_GT~0_combout\,
-	datab => \i_A[0]~input_o\,
-	datac => \i_B[0]~input_o\,
-	datad => \comparatorLoop:1:comparator_n|o_LT~0_combout\,
-	combout => \o_AeqB~0_combout\);
+	dataa => \comparator|o_AeqB~1_combout\,
+	datac => \doneFF|int_q~q\,
+	datad => \comparator|o_AeqB~0_combout\,
+	combout => \doneFF|int_q~0_combout\);
 
--- Location: LCCOMB_X1_Y69_N2
-\comparatorLoop:0:comparator_n|o_GT~0\ : cycloneive_lcell_comb
--- Equation(s):
--- \comparatorLoop:0:comparator_n|o_GT~0_combout\ = (!\comparatorLoop:1:comparator_n|o_LT~0_combout\ & ((\comparatorLoop:1:comparator_n|o_GT~0_combout\) # ((\i_A[0]~input_o\ & !\i_B[0]~input_o\))))
-
+-- Location: FF_X1_Y12_N25
+\doneFF|int_q\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000000010101110",
-	sum_lutc_input => "datac")
+	is_wysiwyg => "true",
+	power_up => "low")
 -- pragma translate_on
 PORT MAP (
-	dataa => \comparatorLoop:1:comparator_n|o_GT~0_combout\,
-	datab => \i_A[0]~input_o\,
-	datac => \i_B[0]~input_o\,
-	datad => \comparatorLoop:1:comparator_n|o_LT~0_combout\,
-	combout => \comparatorLoop:0:comparator_n|o_GT~0_combout\);
+	clk => \i_clk~inputclkctrl_outclk\,
+	d => \doneFF|int_q~0_combout\,
+	clrn => \ALT_INV_i_reset~inputclkctrl_outclk\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \doneFF|int_q~q\);
 
--- Location: LCCOMB_X1_Y69_N4
-\comparatorLoop:0:comparator_n|o_LT~0\ : cycloneive_lcell_comb
--- Equation(s):
--- \comparatorLoop:0:comparator_n|o_LT~0_combout\ = (!\comparatorLoop:1:comparator_n|o_GT~0_combout\ & ((\comparatorLoop:1:comparator_n|o_LT~0_combout\) # ((!\i_A[0]~input_o\ & \i_B[0]~input_o\))))
-
--- pragma translate_off
-GENERIC MAP (
-	lut_mask => "0101010100010000",
-	sum_lutc_input => "datac")
--- pragma translate_on
-PORT MAP (
-	dataa => \comparatorLoop:1:comparator_n|o_GT~0_combout\,
-	datab => \i_A[0]~input_o\,
-	datac => \i_B[0]~input_o\,
-	datad => \comparatorLoop:1:comparator_n|o_LT~0_combout\,
-	combout => \comparatorLoop:0:comparator_n|o_LT~0_combout\);
-
-ww_o_AeqB <= \o_AeqB~output_o\;
-
-ww_o_AgtB <= \o_AgtB~output_o\;
-
-ww_o_AltB <= \o_AltB~output_o\;
+ww_o_done <= \o_done~output_o\;
 END structure;
 
 
