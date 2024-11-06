@@ -16,6 +16,7 @@ ARCHITECTURE structural OF fsmController IS
     SIGNAL input_d0, input_d1: STD_LOGIC;
     SIGNAL green, yellow, red: STD_LOGIC_VECTOR(2 downto 0);
     SIGNAL A, C, D, E: STD_LOGIC;
+    SIGNAL gresetbar: STD_LOGIC;
     SIGNAL output_mux_mstl, output_mux_sstl: STD_LOGIC_VECTOR(2 downto 0);
 
 
@@ -42,7 +43,7 @@ BEGIN
 
     enardFF_y0: enARdFF_2
 			PORT MAP(
-				i_resetBar	=> greset,
+				i_resetBar	=> gresetbar,
 				i_d		=> input_d0,
 				i_enable	=> '1',
 				i_clock		=> clk,
@@ -51,12 +52,21 @@ BEGIN
     
        enardFF_y1: enARdFF_2
 			PORT MAP(
-				i_resetBar	=> greset,
+				i_resetBar	=> gresetbar,
 				i_d		=> input_d1,
 				i_enable	=> '1',
 				i_clock		=> clk,
 				o_q		=> y1,
 				o_qBar		=> not_y1);
+
+        reset_latch: enardFF_2
+            PORT MAP(
+                i_resetBar => gresetbar,
+                i_d => w,
+                i_enable => '1',
+                i_clock => clk,
+                o_q => reset_timer,
+                o_qBar => open);
 
     -- Multiplexers
    
@@ -68,13 +78,11 @@ BEGIN
         GENERIC MAP (n => 3)
         PORT MAP(s0 => y0, s1 => y1, x0 => red, x1 => red, x2 => green, x3 => yellow, y => output_mux_sstl);
 
+    gresetbar <= NOT(greset);
 
     green <= "100";
     yellow <= "010";
     red <= "001";
-
-    not_y0 <= NOT(y1);
-    not_y1 <= NOT(y1);
 
     A <= not_y1 AND not_y0;
     C <= not_y1 AND y0;
@@ -84,13 +92,11 @@ BEGIN
     w <= (msc AND A AND sscs) OR (mst AND C) OR (ssc AND D) OR (sst AND E);
     not_w <= NOT(w);
 
-    input_d0 <= (y0 AND not_w) OR (not_y1 AND w);
+    input_d0 <= (y0 AND not_w) OR (not_y0 AND w);
     input_d1 <= (y1 AND not_w) OR (y1 AND not_y0) OR (y0 AND not_y1 AND w);
    
     -- Output Drivers
     mstl <= output_mux_mstl;
     sstl <= output_mux_sstl;
-
-    reset_timer <= w;
 
 END structural;

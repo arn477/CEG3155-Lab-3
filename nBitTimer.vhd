@@ -6,13 +6,13 @@ ENTITY nBitTimer IS
     PORT(
         i_clk, i_reset: IN STD_LOGIC;
         i_targetCount: IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-        o_done: OUT STD_LOGIC);
+        o_done: OUT STD_LOGIC;
+        o_count: OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0));
 END nBitTimer;
 
 ARCHITECTURE rtl OF nBitTimer IS
     SIGNAL int_count: STD_LOGIC_VECTOR(n-1 DOWNTO 0);
-    SIGNAL int_eq: STD_LOGIC;
-    SIGNAL resetb: STD_LOGIC;
+    SIGNAL int_eq, not_int_eq: STD_LOGIC;
 
     COMPONENT nbitcomparator
         GENERIC(n : INTEGER := 4);
@@ -40,15 +40,14 @@ BEGIN
 
     incrementer: nBitIncrementer
         GENERIC MAP (n => n)
-        PORT MAP (clk => i_clk, reset => i_reset, increment => '1', y => int_count);
+        PORT MAP (clk => i_clk, reset => i_reset, increment => not_int_eq, y => int_count);
     
     comparator: nbitcomparator
         GENERIC MAP (n => n)
         PORT MAP (i_A => int_count, i_B => i_targetCount, o_AeqB => int_eq, o_AgtB => open, o_AltB => open);
-    
-    doneFF: enardFF_2
-        PORT MAP (i_resetBar => resetb, i_d => '1', i_enable => int_eq, i_clock => i_clk, o_q => o_done, o_qBar => open);
 
-    resetb <= not i_reset;
+    o_count <= int_count;
+    not_int_eq <= not int_eq;
+    o_done <= int_eq;
 
 END rtl;
