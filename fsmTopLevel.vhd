@@ -13,7 +13,6 @@ END fsmTopLevel;
 ARCHITECTURE rtl of fsmTopLevel is
     SIGNAL int_sscs, int_msc, int_mst, int_ssc, int_sst: STD_LOGIC;
     SIGNAL int_rst_timer, int_fsm_reset: STD_LOGIC;
-    SIGNAL clk_1hz: STD_LOGIC;
     SIGNAL gresetbar: STD_LOGIC;
     SIGNAL int_msc_count, int_ssc_count: STD_LOGIC_VECTOR(3 DOWNTO 0);
 
@@ -34,18 +33,6 @@ ARCHITECTURE rtl of fsmTopLevel is
             i_targetCount: IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
             o_done: OUT STD_LOGIC;
             o_count: OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0));
-    END COMPONENT;
-
-    COMPONENT clk_div
-        PORT(
-            clock_25Mhz: IN STD_LOGIC;
-            clock_1MHz: OUT STD_LOGIC;
-            clock_100KHz: OUT STD_LOGIC;
-            clock_10KHz: OUT STD_LOGIC;
-            clock_1KHz: OUT STD_LOGIC;
-            clock_100Hz: OUT STD_LOGIC;
-            clock_10Hz: OUT STD_LOGIC;
-            clock_1Hz: OUT STD_LOGIC);
     END COMPONENT;
 
     COMPONENT debouncer_2
@@ -128,18 +115,6 @@ BEGIN
             o_count => int_ssc_count,
             i_targetCount => i_ssc_val,
             o_done => int_ssc
-            );
-
-    clk_div1: clk_div
-        PORT MAP(
-            clock_25Mhz => gclk,
-            clock_1MHz => open,
-            clock_100KHz => open,
-            clock_10KHz => open,
-            clock_1KHz => open,
-            clock_100Hz => open,
-            clock_10Hz => open,
-            clock_1Hz => clk_1hz
             );
 
     sscsDebouncer: debouncer_2

@@ -4,7 +4,6 @@ gclk => nBitTimer:mstTimer.i_clk
 gclk => nBitTimer:sstTimer.i_clk
 gclk => nBitTimer:mscTimer.i_clk
 gclk => nBitTimer:sscTimer.i_clk
-gclk => clk_div:clk_div1.clock_25Mhz
 gclk => debouncer_2:sscsDebouncer.i_clock
 greset => int_rst_timer.IN1
 greset => fsmController:fsmController1.greset
@@ -1232,29 +1231,6 @@ i_Bi => int_LT1.IN1
 i_Bi => int_GT1.IN1
 o_GT <= int_GT.DB_MAX_OUTPUT_PORT_TYPE
 o_LT <= int_LT.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|fsmTopLevel|clk_div:clk_div1
-clock_25Mhz => clock_1Hz~reg0.CLK
-clock_25Mhz => clock_10Hz~reg0.CLK
-clock_25Mhz => clock_100Hz~reg0.CLK
-clock_25Mhz => clock_1KHz~reg0.CLK
-clock_25Mhz => clock_10KHz~reg0.CLK
-clock_25Mhz => clock_100KHz~reg0.CLK
-clock_25Mhz => clock_1MHz~reg0.CLK
-clock_25Mhz => clock_1Mhz_int.CLK
-clock_25Mhz => count_1Mhz[0].CLK
-clock_25Mhz => count_1Mhz[1].CLK
-clock_25Mhz => count_1Mhz[2].CLK
-clock_25Mhz => count_1Mhz[3].CLK
-clock_25Mhz => count_1Mhz[4].CLK
-clock_1MHz <= clock_1MHz~reg0.DB_MAX_OUTPUT_PORT_TYPE
-clock_100KHz <= clock_100KHz~reg0.DB_MAX_OUTPUT_PORT_TYPE
-clock_10KHz <= clock_10KHz~reg0.DB_MAX_OUTPUT_PORT_TYPE
-clock_1KHz <= clock_1KHz~reg0.DB_MAX_OUTPUT_PORT_TYPE
-clock_100Hz <= clock_100Hz~reg0.DB_MAX_OUTPUT_PORT_TYPE
-clock_10Hz <= clock_10Hz~reg0.DB_MAX_OUTPUT_PORT_TYPE
-clock_1Hz <= clock_1Hz~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |fsmTopLevel|debouncer_2:sscsDebouncer

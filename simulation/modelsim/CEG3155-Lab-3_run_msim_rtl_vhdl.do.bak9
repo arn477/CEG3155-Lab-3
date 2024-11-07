@@ -11,6 +11,7 @@ vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitTimer.vhd}
 vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitcomparator.vhd}
 vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitComparator.vhd}
 vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/debouncer_2.vhd}
+vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/clk_div.vhd}
 vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/oneBitAdderSubtractor.vhd}
 vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/nBitAdderSubtractor.vhd}
 vcom -93 -work work {C:/Users/arnav/Desktop/CEG3155-Lab-3/nbitregister.vhd}

@@ -15,6 +15,7 @@ source_file = 1, C:/Users/arnav/Desktop/CEG3155-Lab-3/mux41.vhd
 source_file = 1, C:/Users/arnav/Desktop/CEG3155-Lab-3/mux21.vhd
 source_file = 1, C:/Users/arnav/Desktop/CEG3155-Lab-3/enardFF_2.vhd
 source_file = 1, C:/Users/arnav/Desktop/CEG3155-Lab-3/bcd_7seg.vhd
+source_file = 1, C:/Users/arnav/Desktop/CEG3155-Lab-3/trafficLightController.bdf
 source_file = 1, C:/Users/arnav/Desktop/CEG3155-Lab-3/db/CEG3155-Lab-3.cbx.xml
 source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/prmtvs_b.vhd
 source_file = 1, c:/altera/13.0sp1/quartus/libraries/vhdl/ieee/prmtvs_p.vhd
